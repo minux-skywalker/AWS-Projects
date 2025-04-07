@@ -1,7 +1,7 @@
 # AWS-Projects
 This reposiotry contains AWS Projects by Mihir Sanghrajka
 # AWS Projects Collection
-![Intro Image](AWS%20Assets/Intro%20Image.png?raw=true)
+![Intro Image](AWS Assets/Intro Image.png)
 Welcome to my **AWS Projects Collection**! This repository contains a series of practical projects I've worked on using various Amazon Web Services (AWS). Each project demonstrates a different AWS service or solution, showcasing my learning and hands-on experience with cloud computing.
 
 ## Table of Contents
