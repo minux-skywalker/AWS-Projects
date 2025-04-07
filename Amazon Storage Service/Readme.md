@@ -1,5 +1,6 @@
 # Amazon Storage Services Project
 
+[S3 and EFS](https://github.com/minux-skywalker/AWS-Projects/blob/55f415bea8fcbb1d0ed7009fcce641e60ab72000/AWS%20Assets/S3%20and%20EFS.png?raw=true)
 This project showcases hands-on experience with two key AWS storage solutions — **Amazon S3 (Simple Storage Service)** and **Amazon EFS (Elastic File System)**. It includes detailed steps, screenshots, configurations, and key learnings while working with these services.
 
 ## 📁 Project Structure
