@@ -1,6 +1,7 @@
 # AWS Projects Collection
 
-![Intro Image](https://github.com/minux-skywalker/AWS-Projects/blob/d8bc948ab0bfca1db82943b2ed975996fe725ba0/AWS%20Assets/Into%20Image.png?raw=true)
+![Intro Image](https://github.com/minux-skywalker/AWS-Projects/blob/803721860ac3bc35b932d02c8ba84ec79da86292/AWS%20Assets/AWS%20Services%20so%20far.png)
+
 
 Welcome to my **AWS Projects Collection**! This repository contains a series of hands-on projects demonstrating a wide range of AWS services. Each project showcases my practical understanding and implementation of different AWS features—from storage to hosting, DNS, and security. All documentation includes step-by-step guides, screenshots, learnings, and real-world use cases.
 
