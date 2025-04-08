@@ -1,4 +1,5 @@
 # 🌐 AWS DNS Services Project 2
+![Route 53 EC2 and Apache Server](https://github.com/minux-skywalker/AWS-Projects/blob/da942a79c6db9e310188c30e83cfafd4bc549e82/AWS%20Assets/EC2%20Linux%20Apache%20and%20Route53.png)
 
 This project demonstrates how to host a static website using Apache on an Amazon EC2 instance with full DNS configuration using Route 53 and SSL encryption via Let’s Encrypt (Certbot).
 
