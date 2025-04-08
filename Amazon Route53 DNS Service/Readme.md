@@ -1,6 +1,6 @@
 # 🌐 AWS DNS Services Project
 
-![Route 53 and S3](https://d1.awsstatic.com/product-marketing/Route%2053/Product-Page-Diagram_Route-53_HIW%402x.5eb8a0bfb3e93ba84584a305a8dc23c1994f0d8f.png)
+![Route 53 EC2 and S3]([https://d1.awsstatic.com/product-marketing/Route%2053/Product-Page-Diagram_Route-53_HIW%402x.5eb8a0bfb3e93ba84584a305a8dc23c1994f0d8f.png](https://github.com/minux-skywalker/AWS-Projects/blob/35e58d9826fc71266d5040b76bc7bc97b169aca6/AWS%20Assets/EC2%20Route53%20and%20S3.png)
 
 This project demonstrates the complete process of hosting a **static website** using **Amazon S3** and managing DNS using **Amazon Route 53**. It involves domain registration, bucket setup, static website hosting configuration, redirection, logging, permissions, and DNS aliasing.
 
