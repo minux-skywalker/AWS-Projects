@@ -1,188 +1,147 @@
+![VPC and ALB](https://github.com/minux-skywalker/AWS-Projects/blob/1cf34bdaf885000dbf43d54c3b060b85c499fd38/AWS%20Assets/VPC%20and%20ALB.png)
+# 🚀 AWS Cloud Architecture Project: Secure & Scalable Infrastructure
 
-# 🏗️ AWS Cloud Architecture Project
-
-This project is a comprehensive walkthrough of building a secure, scalable, and modular AWS web infrastructure from scratch. The goal was to simulate a real-world deployment with best practices in networking, access control, compute, and storage using AWS services.
-
----
-
-## 📌 Project Goals
-
-- Build a secure and structured cloud architecture using AWS core services.
-- Deploy a web application hosted on an EC2 instance in a **private subnet**.
-- Enable internet access for the instance using a **NAT Gateway**.
-- Configure an **Application Load Balancer** in the **public subnet** to route traffic to the backend server.
-- Store and serve assets from **Amazon S3**.
-- Enable secure management using **Session Manager**, without exposing any public IPs.
-- Apply real-world **CIDR subnetting** logic for network design.
+This project demonstrates a complete end-to-end AWS infrastructure setup designed with real-world architectural logic. It covers VPC, Subnets, EC2, ALB, S3, IAM, and AWS Systems Manager Session Manager.
 
 ---
 
-## 🌐 Architecture Diagram (Logical)
+## 🧱 Infrastructure Overview
 
-```
-User
-  |
-  v
-Application Load Balancer (Public Subnet)
-  |
-  v
-EC2 Web Server (Private Subnet, No Public IP)
-  |
-  v
-NAT Gateway (Public Subnet)
-  |
-  v
-Internet
-  ↘
-Amazon S3 (Object Storage)
-```
+We built a secure and scalable AWS infrastructure using the following core services:
+
+- **Amazon VPC** 🌐
+- **Public and Private Subnets** 🧩
+- **Internet Gateway & NAT Gateway** 🌍➡️🔐
+- **Amazon EC2 (Web Server)** 💻
+- **IAM Roles & Policies** 🛡️
+- **AWS Systems Manager Session Manager** 🖥️🔒
+- **Application Load Balancer (ALB)** 📶⚖️
+- **Amazon S3 for storage** 📦☁️
 
 ---
 
-## ⚙️ Key AWS Services Used
+## 📌 Key Steps and Concepts
 
-### 1. **Amazon VPC**
-- Created a logically isolated network using VPC.
-- Designed CIDR `/23` block and divided into:
-  - `/24` → Management subnet
-  - `/25` → Web subnet
-  - `/26` → App subnet
-- Implemented custom **route tables** and **subnet associations**.
+### 🔹 VPC & Subnetting
 
-### 2. **Subnetting and CIDR Logic**
-- Calculated and applied proper subnetting using:
-  - /23 (512 IPs)
-  - /24 (256 IPs)
-  - /25 (128 IPs)
-  - /26 (64 IPs)
-- Ensured each subnet is aligned to business units: mgmt, web, app.
+- Created a /23 VPC range.
+- Divided into multiple subnets using /24, /25, and /26 CIDR blocks.
+- Used **2 Availability Zones (ap-south-1a and ap-south-1b)** for high availability.
 
-### 3. **Internet Gateway & NAT Gateway**
-- Attached **Internet Gateway** to the VPC for public access.
-- Created **Elastic IP** and associated with **NAT Gateway**.
-- NAT Gateway allows **private subnet EC2** to reach the internet securely.
+### 🔹 Internet Gateway (IGW) and NAT Gateway
 
-### 4. **Amazon EC2**
-- Deployed **Amazon Linux 2023 AMI** in private subnet.
-- Installed **Apache**, **PHP**, **AWS SDK for PHP**.
-- Connected to **Amazon S3** to serve assets dynamically.
+- IGW attached to the VPC for internet access to **public subnets**.
+- NAT Gateway placed in public subnet to provide **outbound internet access to private subnets**.
+- Used Elastic IP for NAT Gateway.
 
----
+### 🔹 EC2 Instance
 
-## 🔐 Secure Access with Session Manager
+- Launched EC2 in a **private subnet**, ensuring it had only **private IP**.
+- Skipped SSH Key Pair intentionally for security.
+- Connected using **Session Manager** (no need for public IP or SSH).
 
-### What is Session Manager?
-- Part of AWS Systems Manager.
-- Allows browser-based terminal access to EC2 instances **without public IP or SSH**.
+### 🔹 AWS Systems Manager - Session Manager
 
-### Key Benefits:
-- No need to open port 22 (SSH) — more secure.
-- No need to manage key pairs.
-- Fully auditable session logs.
+- Enabled **secure browser-based access** to EC2 in private subnet.
+- No public IP required.
+- Ran diagnostic command:
 
-### Command Used Inside Session Manager:
 ```bash
 echo -n 'Private IPv4 Address: ' && ifconfig enX0 | grep -i mask | awk '{print $2}' | cut -f2 -d: && echo -n 'Public IPv4 Address: ' && curl checkip.amazonaws.com
 ```
 
-> 🔍 Output shows private IP of the instance and public IP of the **NAT Gateway** — confirming internet access via NAT.
+- Observed that NAT Gateway's IP appears as the public IP (via curl).
+
+### 🔹 Application Load Balancer (ALB)
+
+- Created **Internet-facing ALB**.
+- Attached **public subnets**, selected correct **Security Group**.
+- Registered EC2 instance in a **Target Group**.
+- Configured **HTTP listeners** and **health checks**.
+- Verified website through ALB DNS name (manual http:// input required).
+
+### 🔹 Amazon S3 Integration
+
+- Created S3 bucket `awsbucketforvpc`.
+- Uploaded test files.
+- Switched to EC2 instance to access files.
+- Initially access failed due to **missing IAM permissions**.
+- Added **AmazonS3ReadOnlyAccess** policy to instance role.
+- Successfully retrieved S3 files via web interface.
 
 ---
 
-## 🌐 Application Load Balancer (ALB)
+## 📚 Learnings
 
-- Type: **Application (Layer 7)**
-- Scheme: **Internet-facing**
-- Security Group: Allows HTTP (port 80) from anywhere.
-- Registered target: Web Server in **private subnet**.
-- Target group: Health checks and routing to web instance.
+### ✅ AWS Services Used and How They Were Applied:
 
-### ALB Setup Summary:
-- Created ALB with correct **availability zones** and **public subnet mapping**.
-- Removed default SG and attached custom **load balancer SG**.
-- Created target group, registered EC2, and verified health check.
-- Once healthy, accessed the site via ALB’s **DNS name**.
+1. **Amazon VPC**
+   - Logical isolation, routing, subnetting, availability zones.
 
----
+2. **Subnetting & CIDR**
+   - CIDR: /24, /25, /26
+   - Efficient subnet planning for real-world enterprise structure.
 
-## 📂 Amazon S3 Integration
+3. **Internet Gateway (IGW)**
+   - Internet access for public subnet resources.
 
-- Created bucket: `awsbucketforvpc`
-- Uploaded HTML/PHP files.
-- EC2 script connected to S3 bucket using:
-  - IAM role: `AmazonS3ReadOnlyAccess`
-- Displayed S3 assets on the website successfully.
+4. **NAT Gateway**
+   - Outbound access for private subnet resources.
 
----
+5. **IAM**
+   - Fine-grained access using roles & policies.
+   - Used AmazonSSMManagedInstanceCore and AmazonS3ReadOnlyAccess.
 
-## 🔒 IAM Roles & Policies
+6. **Amazon EC2**
+   - Installed Apache, PHP, AWS SDK, deployed web app.
 
-- Attached **AmazonSSMManagedInstanceCore** to enable Session Manager.
-- Later added **AmazonS3ReadOnlyAccess** to the same EC2 role.
-- Followed **least privilege principle** by attaching only necessary permissions.
+7. **AWS Systems Manager**
+   - Session Manager enabled secure shell access to EC2 without SSH.
 
----
+8. **Security Groups**
+   - Principle of least privilege.
+   - ALB SG: Allows HTTP from anywhere.
+   - Web Server SG: Allows traffic only from ALB.
 
-## 🧠 Learnings Recap
+9. **Application Load Balancer**
+   - Layer 7 routing (HTTP), health checks, target groups.
 
-### ✅ What I Learned
-
-- Designed custom VPC, subnetting strategies, and routing logic.
-- Understood NAT vs IGW, stateful vs stateless behavior.
-- Used Session Manager to securely manage EC2 without SSH.
-- Attached and tested IAM roles securely for S3 access.
-- Built scalable and secure architecture with ALB, EC2, and S3.
-
-### 🛠 Skills Applied
-
-- CIDR Planning
-- Route Table Configuration
-- Security Groups vs NACLs
-- Load Balancer Setup
-- IAM Role Management
-- Web App Deployment via User Data
-- Troubleshooting permissions and health checks
+10. **Amazon S3**
+    - Web asset storage and retrieval from EC2.
 
 ---
 
-## ✅ Verification Steps
+## 🧠 Skills Gained
 
-- ✅ ALB status = `Active`
-- ✅ Target Group = `Healthy`
-- ✅ Website loads via `http://<ALB-DNS-Name>`
-- ✅ EC2 shows S3 assets
-- ✅ Instance access via Session Manager
-
-> ⚠️ Note: Use **http://** prefix in the browser, as **https://** will fail (no SSL configured).
-
----
-
-## 📉 Limitations & Next Steps
-
-Current setup has **single points of failure**:
-- One EC2 instance
-- One NAT Gateway
-
-### Future Enhancements:
-- EC2 **Auto Scaling**
-- Multiple NAT Gateways (HA)
-- HTTPS via **AWS ACM**
-- CloudFront CDN
-- Infrastructure as Code (Terraform / CloudFormation)
-- Containers with ECS/EKS
+- ✅ VPC/Subnetting logic & CIDR mastery
+- ✅ EC2 configuration for private networking
+- ✅ Secure access via Session Manager (no SSH)
+- ✅ IAM Role/Policy structuring
+- ✅ Load balancing & routing concepts
+- ✅ Web deployment pipeline
+- ✅ S3 integration and policy troubleshooting
 
 ---
 
-## 💡 Final Thoughts
+## ⚠️ Notes on Architecture
 
-This project helped me build a complete AWS environment from scratch, using best practices in security, networking, and resource provisioning. It’s a solid foundation for more advanced architectures and cloud-native solutions.
+- **Single Points of Failure**:
+  - One EC2 instance
+  - One NAT Gateway
+
+🔧 Consider using **Auto Scaling Groups**, **Multi-AZ NAT Gateways**, **CloudFront**, and **SSL (ACM)** for production readiness.
+
+---
+
+## ✅ Final Output
+
+- Functional web app accessible via ALB's public DNS.
+- S3 file access via EC2.
+- Completely secure networking with no open ports to private subnet.
 
 ---
 
-## 🙏 Acknowledgements
+## 🙏 Credits
 
-A kind thank you to the **AWS team** for their fantastic tutorials and resources.
-
-**Reference:** [https://aws.amazon.com/tutorials/](https://aws.amazon.com/tutorials/)
-
----
+Thanks to the AWS team for their in-depth tutorials.
+📚 [Reference](https://aws.amazon.com/tutorials/)
