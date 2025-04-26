@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mihir Sanghrajka | TVA Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="texture-overlay"></div>
+
+<header class="navbar">
+  <h1 class="logo">Mihir S.</h1>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="animation-container">
+      <div class="door"></div>
+      <div class="man"></div>
+    </div>
+    <div class="hero-content">
+      <h2 class="typewriter">Nice to meet you!</h2>
+      <p>Hi, I'm <span class="highlight">Mihir Sanghrajka</span> — a Cloud Architect and DevOps Engineer, designing resilient infrastructures across timelines. 🌌</p>
+      <a href="#contact" class="btn">Collaborate</a>
+    </div>
+  </section>
+
+  <section id="about" class="section framed">
+    <h2>About Me</h2>
+    <p>
+      I'm Mihir Sanghrajka, a passionate Cloud Architect and DevOps Engineer with a mission to craft secure, scalable, and efficient infrastructures in the cloud.  
+      With a B.Sc. in Computer Science and a post-graduate certification in Cloud Data Management, I blend academic excellence with real-world experience.  
+      <br><br>
+      Currently working at RansahAI, I specialize in AWS architecture, Terraform automation, and robust DevOps pipelines.  
+      I believe in continuous learning, attention to detail, and designing solutions that stand the test of timelines — much like the TVA maintains the sacred one.  
+      Whether it’s deploying secure VPCs, orchestrating CI/CD workflows, or optimizing cloud-native applications, I bring a future-focused mindset to every project.
+      <br><br>
+      Welcome to my timeline. Let's build extraordinary things together. ✨
+    </p>
+  </section>
+
+  <section id="skills" class="section framed">
+    <h2>Skills</h2>
+    <div class="skill-grid">
+      <div class="skill-item">AWS Certified</div>
+      <div class="skill-item">DevOps Engineering</div>
+      <div class="skill-item">Docker & Kubernetes</div>
+      <div class="skill-item">Terraform & IaC</div>
+      <div class="skill-item">Cloud Architecture</div>
+      <div class="skill-item">Secure Networking</div>
+    </div>
+  </section>
+
+  <section id="contact" class="section framed">
+    <h2>Contact</h2>
+    <p>Let's converge timelines and create something extraordinary. ✨</p>
+    <a href="mailto:your-email@example.com" class="btn">Reach Out</a>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Mihir Sanghrajka | TVA Timeline Authority</p>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
