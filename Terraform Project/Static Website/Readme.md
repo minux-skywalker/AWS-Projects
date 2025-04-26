@@ -1,6 +1,7 @@
 # Terraform Static Website on AWS S3
 
 Welcome to the **Terraform Static Website Project**! 🚀
+[![Notion Docs](https://img.shields.io/badge/Notion-Terraform%20Docs-000?logo=notion&logoColor=white)](https://pool-finch-5b7.notion.site/Terraform-Documentation-1e18dcf3a57080b784a0f919d25a3f00?pvs=73)
 
 This project uses **Terraform** to provision a fully functional static website hosted on **AWS S3**. It automates the creation of the S3 bucket, configures public access, uploads website files, and outputs the website URL. 
 
