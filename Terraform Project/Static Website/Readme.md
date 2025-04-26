@@ -1,3 +1,4 @@
+![Terraform S3](https://github.com/minux-skywalker/AWS-Projects/raw/48ee170c78cead910092f7fc535f043c7932a0cf/AWS%20Assets/Terraform_S3.png)
 # Terraform Static Website on AWS S3
 
 Welcome to the **Terraform Static Website Project**! 🚀
