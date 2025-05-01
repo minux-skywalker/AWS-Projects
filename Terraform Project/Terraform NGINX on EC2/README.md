@@ -1,7 +1,7 @@
 
 # 🏗️ Terraform AWS EC2 Infrastructure
 
-![Ghibli-style AWS Terraform Architecture] (https://github.com/minux-skywalker/AWS-Projects/blob/a2ce994e59932744bb4358884bd62144e1941111/AWS%20Assets/Terraform%20VPC%20EC2.png)
+![Ghibli-style AWS Terraform Architecture](https://github.com/minux-skywalker/AWS-Projects/blob/a2ce994e59932744bb4358884bd62144e1941111/AWS%20Assets/Terraform%20VPC%20EC2.png)
 
 ## 🚀 Project Overview
 
