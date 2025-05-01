@@ -104,7 +104,7 @@ ssh -i your-key.pem ec2-user@<public-ip>
 
 > Ghibli-style architecture diagram will be added below.
 
-![Ghibli-style AWS Terraform Architecture](./architecture-ghibli-style.png)
+![Ghibli-style AWS Terraform Architecture]()
 
 ---
 
@@ -112,7 +112,7 @@ ssh -i your-key.pem ec2-user@<public-ip>
 
 **Mihir Sanghrajka**  
 DevOps & Cloud Engineer | AWS Certified | Terraform Enthusiast  
-🔗 [LinkedIn](https://www.linkedin.com/in/mihirsanghrajka)
+🔗 [LinkedIn](https://github.com/minux-skywalker/AWS-Projects/blob/5a67fbe8ea8cc115372922cfa921d08be6b509c5/AWS%20Assets/Terraform%20Diagram%20ARCH.png)
 
 ---
 
